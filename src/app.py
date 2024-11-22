@@ -16,7 +16,7 @@ if "aws_credentials" not in st.session_state:
 #Page Configurations
 st.set_page_config(page_title="DCFS GeauxBot AI", 
                    page_icon="la.jpeg", 
-                   layout="center", 
+                   layout="centered", 
                    menu_items=None)
 st.title("Louisiana DCFS Virtual AI Assistant") #page title
 
