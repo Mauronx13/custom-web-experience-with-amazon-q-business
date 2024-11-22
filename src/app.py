@@ -72,11 +72,11 @@ else:
         except Exception as e:
             st.error(f"Error refreshing Identity Center token: {e}. Please reload the page.")
 
-    col1 = st.columns(1)
+    col1, col2 = st.columns([1,1])
 
-    #with col1:
-    #    st.write("Welcome: ", user_email)
     with col1:
+        st.write("Welcome: ", user_name)
+    with col2:
         st.button("Clear Chat History", on_click=clear_chat_history)
 
     # Initialize the chat messages in the session state if it doesn't exist
