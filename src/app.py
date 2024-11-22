@@ -13,19 +13,22 @@ utils.retrieve_config_from_agent()
 if "aws_credentials" not in st.session_state:
     st.session_state.aws_credentials = None
 
-st.set_page_config(page_title="Louisiana DCFS") #HTML title
-st.title("Amazon Q Business") #page title
+#Page Configurations
+st.set_page_config(page_title="DCFS GeauxBot AI", 
+                   page_icon="la.ico", 
+                   layout="wide", 
+                   menu_items=None)
+st.title("Louisiana DCFS Virtual AI Assistant") #page title
 
 # Define a function to clear the chat history
 def clear_chat_history():
-    st.session_state.messages = [{"role": "assistant", "content": "How may I assist you today?"}]
+    st.session_state.messages = [{"role": "assistant", "content": "Hi! How may I assist you in your search of DCFS policy information?"}]
     st.session_state.questions = []
     st.session_state.answers = []
     st.session_state.input = ""
     st.session_state["chat_history"] = []
     st.session_state["conversationId"] = ""
     st.session_state["parentMessageId"] = ""
-
 
 oauth2 = utils.configure_oauth_component()
 if "token" not in st.session_state:
