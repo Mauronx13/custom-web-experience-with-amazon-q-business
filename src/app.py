@@ -15,8 +15,8 @@ if "aws_credentials" not in st.session_state:
 
 #Page Configurations
 st.set_page_config(page_title="DCFS GeauxBot AI", 
-                   page_icon="la.ico", 
-                   layout="wide", 
+                   page_icon="la.jpeg", 
+                   layout="center", 
                    menu_items=None)
 st.title("Louisiana DCFS Virtual AI Assistant") #page title
 
@@ -34,7 +34,7 @@ oauth2 = utils.configure_oauth_component()
 if "token" not in st.session_state:
     # If not, show authorize button
     redirect_uri = f"https://{utils.OAUTH_CONFIG['ExternalDns']}/component/streamlit_oauth.authorize_button/index.html"
-    result = oauth2.authorize_button("Connect with Cognito",scope="openid", pkce="S256", redirect_uri=redirect_uri)
+    result = oauth2.authorize_button("Connect to Amazon Q",scope="openid", pkce="S256", redirect_uri=redirect_uri)
     if result and "token" in result:
         # If authorization successful, save token in session state
         st.session_state.token = result.get("token")
@@ -47,7 +47,7 @@ else:
     token = st.session_state["token"]
     refresh_token = token["refresh_token"] # saving the long lived refresh_token
     user_email = jwt.decode(token["id_token"], options={"verify_signature": False})["email"]
-    if st.button("Refresh Cognito Token") :
+    #if st.button("Refresh Cognito Token") :
         # If refresh token button is clicked or the token is expired, refresh the token
         token = oauth2.refresh_token(token, force=True)
         # Put the refresh token in the session state as it is not returned by Cognito
@@ -81,7 +81,7 @@ else:
 
     # Initialize the chat messages in the session state if it doesn't exist
     if "messages" not in st.session_state:
-        st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
+        st.session_state["messages"] = [{"role": "assistant", "content": "Hi! How may I assist you in your search of DCFS policy information?"}]
 
     if "conversationId" not in st.session_state:
         st.session_state["conversationId"] = ""
